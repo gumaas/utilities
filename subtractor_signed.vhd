@@ -78,6 +78,7 @@ architecture RTL of subtractor_signed is
 	signal 	result_r 		: signed( reslen_g-1 downto 0);
 	signal 	underflow_r 	: std_logic;
 	signal 	overflow_r 		: std_logic;
+	
 begin
 
 --	subtraction of resized (in order to prevent overflow) input values

@@ -38,7 +38,17 @@ architecture RTL of arith_test_bench is
 			result_add_unsigned_FT,
 			result_add_unsigned_TF,
 			result_add_unsigned_TT 	: unsigned( vect_len_c-1 downto 0);
-						
+	
+	signal 	result_mult_unsigned_FF,
+			result_mult_unsigned_FT,
+			result_mult_unsigned_TF,
+			result_mult_unsigned_TT 	: unsigned( 2*vect_len_c-1 downto 0);
+	
+	signal 	result_mult_signed_FF,
+			result_mult_signed_FT,
+			result_mult_signed_TF,
+			result_mult_signed_TT 	: signed( 2*vect_len_c-1 downto 0);
+											
 begin
 --	clock generation	
 	clkgen : process is
@@ -247,7 +257,7 @@ begin
 			blen_g      => vect_len_c,
 			reslen_g    => vect_len_c,
 			reg_out_g   => True,
-			reg_arith_g => True
+			reg_arith_g => False
 		)
 		port map(
 			clk_i       => clk,
@@ -344,6 +354,163 @@ begin
 			overflow_o  => open,
 			underflow_o => open
 		);	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+
+	multiplier_signed_FF_inst : entity work.multiplier_signed
+		generic map(
+			alen_g      => vect_len_c,
+			blen_g      => vect_len_c,
+			reslen_g    => 2*vect_len_c,
+			reg_out_g   => False,
+			reg_arith_g => False
+		)
+		port map(
+			clk_i       => clk,
+			a_i         => a_signed,
+			b_i         => b_signed,
+			result_o    => result_mult_signed_FF,
+			overflow_o  => open,
+			underflow_o => open
+		);	
+	
+	multiplier_signed_FT_inst : entity work.multiplier_signed
+		generic map(
+			alen_g      => vect_len_c,
+			blen_g      => vect_len_c,
+			reslen_g    => 2*vect_len_c,
+			reg_out_g   => False,
+			reg_arith_g => True
+		)
+		port map(
+			clk_i       => clk,
+			a_i         => a_signed,
+			b_i         => b_signed,
+			result_o    => result_mult_signed_FT,
+			overflow_o  => open,
+			underflow_o => open
+		);	
+		
+	multiplier_signed_TF_inst : entity work.multiplier_signed
+		generic map(
+			alen_g      => vect_len_c,
+			blen_g      => vect_len_c,
+			reslen_g    => 2*vect_len_c,
+			reg_out_g   => True,
+			reg_arith_g => False
+		)
+		port map(
+			clk_i       => clk,
+			a_i         => a_signed,
+			b_i         => b_signed,
+			result_o    => result_mult_signed_TF,
+			overflow_o  => open,
+			underflow_o => open
+		);	
+		
+	multiplier_signed_TT_inst : entity work.multiplier_signed
+		generic map(
+			alen_g      => vect_len_c,
+			blen_g      => vect_len_c,
+			reslen_g    => 2*vect_len_c,
+			reg_out_g   => True,
+			reg_arith_g => True
+		)
+		port map(
+			clk_i       => clk,
+			a_i         => a_signed,
+			b_i         => b_signed,
+			result_o    => result_mult_signed_TT,
+			overflow_o  => open,
+			underflow_o => open
+		);	
+		
+		
+		
+	multiplier_unsigned_FF_inst : entity work.multiplier_unsigned
+		generic map(
+			alen_g      => vect_len_c,
+			blen_g      => vect_len_c,
+			reslen_g    => 2*vect_len_c,
+			reg_out_g   => False,
+			reg_arith_g => False
+		)
+		port map(
+			clk_i       => clk,
+			a_i         => a_unsigned,
+			b_i         => b_unsigned,
+			result_o    => result_mult_unsigned_FF,
+			overflow_o  => open,
+			underflow_o => open
+		);	
+	
+	multiplier_unsigned_FT_inst : entity work.multiplier_unsigned
+		generic map(
+			alen_g      => vect_len_c,
+			blen_g      => vect_len_c,
+			reslen_g    => 2*vect_len_c,
+			reg_out_g   => False,
+			reg_arith_g => True
+		)
+		port map(
+			clk_i       => clk,
+			a_i         => a_unsigned,
+			b_i         => b_unsigned,
+			result_o    => result_mult_unsigned_FT,
+			overflow_o  => open,
+			underflow_o => open
+		);	
+		
+	multiplier_unsigned_TF_inst : entity work.multiplier_unsigned
+		generic map(
+			alen_g      => vect_len_c,
+			blen_g      => vect_len_c,
+			reslen_g    => 2*vect_len_c,
+			reg_out_g   => True,
+			reg_arith_g => False
+		)
+		port map(
+			clk_i       => clk,
+			a_i         => a_unsigned,
+			b_i         => b_unsigned,
+			result_o    => result_mult_unsigned_TF,
+			overflow_o  => open,
+			underflow_o => open
+		);	
+		
+	multiplier_unsigned_TT_inst : entity work.multiplier_unsigned
+		generic map(
+			alen_g      => vect_len_c,
+			blen_g      => vect_len_c,
+			reslen_g    => 2*vect_len_c,
+			reg_out_g   => True,
+			reg_arith_g => True
+		)
+		port map(
+			clk_i       => clk,
+			a_i         => a_unsigned,
+			b_i         => b_unsigned,
+			result_o    => result_mult_unsigned_TT,
+			overflow_o  => open,
+			underflow_o => open
+		);	
+
+	
+		
+		
+		
+		
 
 
 end architecture RTL;
